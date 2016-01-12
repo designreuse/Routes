@@ -6,3 +6,6 @@ server:
   adminConnectors:
     - type: http
       port: 8443
+
+logging:
+  level: DEBUG
