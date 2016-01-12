@@ -22,4 +22,28 @@ public class Category {
 
     @JsonProperty
     private Map<String, String> icon;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPluralName() {
+        return pluralName;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public boolean isPrimary() {
+        return isPrimary;
+    }
+
+    public Map<String, String> getIcon() {
+        return icon;
+    }
 }
