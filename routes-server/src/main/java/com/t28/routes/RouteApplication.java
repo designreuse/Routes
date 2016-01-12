@@ -1,10 +1,10 @@
-package com.t28.route;
+package com.t28.routes;
 
-import com.t28.route.resource.ItineraryResource;
+import com.mongodb.DB;
+import com.t28.routes.mongodb.MongodbFactory;
+import com.t28.routes.resource.ItineraryResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-
-import javax.print.attribute.standard.MediaSize;
 
 public class RouteApplication extends Application<RouteConfiguration> {
     private static final String NAME = "Routes";
@@ -20,6 +20,8 @@ public class RouteApplication extends Application<RouteConfiguration> {
 
     @Override
     public void run(RouteConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().register(new ItineraryResource(null));
+        final MongodbFactory factory = configuration.getMongodbFactory();
+        final DB database = factory.create();
+        environment.jersey().register(new ItineraryResource(database.getCollection("itinerary")));
     }
 }

@@ -1,8 +1,6 @@
-package com.t28.route.resource;
+package com.t28.routes.resource;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
