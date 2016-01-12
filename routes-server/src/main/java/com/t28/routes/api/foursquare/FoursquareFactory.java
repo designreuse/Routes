@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 public class FoursquareFactory {
     @Valid
@@ -17,6 +18,6 @@ public class FoursquareFactory {
     private String clientSecret;
 
     public Foursquare create() {
-        return new Foursquare(clientId, clientSecret);
+        return new Foursquare(clientId, clientSecret, new Date());
     }
 }
