@@ -1,7 +1,13 @@
 package com.t28.routes.resource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
+import com.mongodb.util.JSON;
 import com.t28.routes.entity.place.Category;
 import com.t28.routes.entity.place.Coordinate;
 import com.t28.routes.entity.place.Location;
@@ -14,8 +20,7 @@ import com.t28.routes.http.foursquare.entity.Meta;
 import com.t28.routes.http.foursquare.entity.TinyVenue;
 import com.t28.routes.http.foursquare.venues.VenuesSearch;
 import com.t28.routes.http.foursquare.venues.VenuesSearchRequest;
-import org.mongojack.JacksonDBCollection;
-import org.mongojack.WriteResult;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -23,6 +28,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +37,11 @@ import java.util.List;
 public class PlaceResource {
     private static final int DEFAULT_LIMIT = 50;
 
-    private final JacksonDBCollection<Place, String> collection;
+    private final DBCollection collection;
     private final Foursquare foursquare;
 
     public PlaceResource(DBCollection collection, Foursquare foursquare) {
-        this.collection = JacksonDBCollection.wrap(collection, Place.class, String.class);
+        this.collection = collection;
         this.foursquare = foursquare;
     }
 
@@ -61,10 +67,20 @@ public class PlaceResource {
     @GET
     @Path("/{id}")
     public Response find(@PathParam("id") String id) {
-        return Response.ok().build();
+        if (Strings.isNullOrEmpty(id)) {
+            return Response.status(Response.Status.NOT_FOUND).entity(new Place.Builder().build()).build();
+        }
+
+        final DBObject object = collection.findOne(new ObjectId(id));
+        if (object == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        final String json = JSON.serialize(object);
+        return Response.status(Response.Status.OK).entity(json).build();
     }
 
-    private Response search(FoursquareRequest<VenuesSearch> request) throws HttpException {
+    private Response search(final FoursquareRequest<VenuesSearch> request) throws HttpException {
         HttpResponse<VenuesSearch> httpResponse = request.send();
         if (httpResponse.getStatusCode() != Response.Status.OK.getStatusCode()) {
             throw new HttpException("Received status code is not expected:" + httpResponse.getStatusCode());
@@ -83,18 +99,25 @@ public class PlaceResource {
 
         final List<TinyVenue> venues = response.getVenues();
         final List<Place> places = new ArrayList<Place>();
+        final List<DBObject> objects = new ArrayList<DBObject>();
         for (TinyVenue venue : venues) {
             final Place place = convertToPlace(venue);
             places.add(place);
+
+            final String json = place.toJson();
+            objects.add((DBObject) JSON.parse(json));
         }
-        // TODO:
+
+        // TODO: to use thread pool executor
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final WriteResult<Place, String> result = collection.insert(places);
+                final WriteResult result = collection.insert(objects);
+                System.out.println(result);
             }
         }).start();
-        return Response.status(Response.Status.OK).encoding("ISO_8859_1").entity(places).build();
+
+        return Response.status(Response.Status.OK).entity(places).build();
     }
 
     private Place convertToPlace(TinyVenue venue) {
