@@ -2,7 +2,6 @@ package com.t28.routes.http;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
-import com.mashape.unirest.http.HttpResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,10 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Response<T> {
-    private final HttpResponse<T> delegate;
+public class HttpResponse<T> {
+    private final com.mashape.unirest.http.HttpResponse<T> delegate;
 
-    private Response(HttpResponse<T> delegate) {
+    private HttpResponse(com.mashape.unirest.http.HttpResponse<T> delegate) {
         this.delegate = delegate;
     }
 
@@ -30,16 +29,16 @@ public class Response<T> {
         return delegate.getBody();
     }
 
-    public String getRawResult() throws ApiException {
+    public String getRawResult() throws HttpException {
         final InputStream input = delegate.getRawBody();
         try {
             return CharStreams.toString(new InputStreamReader(input, Charsets.UTF_8));
         } catch (IOException e) {
-            throw new ApiException(e);
+            throw new HttpException(e);
         }
     }
 
-    public static <T> Response<T> from(HttpResponse<T> delegate) {
-        return new Response<T>(delegate);
+    public static <T> HttpResponse<T> from(com.mashape.unirest.http.HttpResponse<T> delegate) {
+        return new HttpResponse<T>(delegate);
     }
 }

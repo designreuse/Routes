@@ -1,9 +1,8 @@
 package com.t28.routes.http.foursquare.venues;
 
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.t28.routes.http.ApiException;
-import com.t28.routes.http.Response;
+import com.t28.routes.http.HttpException;
+import com.t28.routes.http.HttpResponse;
 import com.t28.routes.http.foursquare.Foursquare;
 import com.t28.routes.http.foursquare.FoursquareRequest;
 
@@ -24,12 +23,12 @@ public class VenuesSearchRequest extends FoursquareRequest<VenuesSearch> {
     }
 
     @Override
-    public Response<VenuesSearch> send() throws ApiException {
+    public HttpResponse<VenuesSearch> send() throws HttpException {
         try {
-            final HttpResponse<VenuesSearch> response = get(VenuesSearch.class);
-            return Response.from(response);
+            final com.mashape.unirest.http.HttpResponse httpResponse = get(VenuesSearch.class);
+            return HttpResponse.from(httpResponse);
         } catch (UnirestException e) {
-            throw new ApiException(e);
+            throw new HttpException(e);
         }
     }
 

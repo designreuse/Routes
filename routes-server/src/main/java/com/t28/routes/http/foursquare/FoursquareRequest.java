@@ -1,8 +1,8 @@
 package com.t28.routes.http.foursquare;
 
-import com.t28.routes.http.Request;
+import com.t28.routes.http.HttpRequest;
 
-public abstract class FoursquareRequest<T> extends Request<T> {
+public abstract class FoursquareRequest<T> extends HttpRequest<T> {
     private static final String KEY_CLIENT_ID = "client_id";
     private static final String KEY_CLIENT_SECRET = "client_secret";
     private static final String KEY_VERSION = "v";
