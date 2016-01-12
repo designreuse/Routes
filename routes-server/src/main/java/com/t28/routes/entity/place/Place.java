@@ -81,7 +81,7 @@ public class Place {
         }
 
         public Builder categories(List<Category> categories) {
-            categories.addAll(categories);
+            this.categories.addAll(categories);
             return this;
         }
 
