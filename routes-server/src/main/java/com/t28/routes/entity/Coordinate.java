@@ -1,7 +1,6 @@
-package com.t28.routes.entity.place;
+package com.t28.routes.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.t28.routes.entity.Entity;
 
 public class Coordinate extends Entity {
     @JsonProperty(required = true)

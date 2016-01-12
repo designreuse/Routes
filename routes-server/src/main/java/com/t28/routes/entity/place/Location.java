@@ -1,6 +1,7 @@
 package com.t28.routes.entity.place;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.t28.routes.entity.Coordinate;
 import com.t28.routes.entity.Entity;
 
 public class Location extends Entity {
