@@ -1,4 +1,4 @@
-package com.t28.routes.api.foursquare.entity;
+package com.t28.routes.http.foursquare.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;

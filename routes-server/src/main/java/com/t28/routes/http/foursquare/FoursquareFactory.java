@@ -1,4 +1,4 @@
-package com.t28.routes.api.foursquare;
+package com.t28.routes.http.foursquare;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;

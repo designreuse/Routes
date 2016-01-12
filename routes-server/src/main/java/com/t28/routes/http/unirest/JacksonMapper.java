@@ -1,4 +1,4 @@
-package com.t28.routes.api.unirest;
+package com.t28.routes.http.unirest;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.mashape.unirest.http.ObjectMapper;

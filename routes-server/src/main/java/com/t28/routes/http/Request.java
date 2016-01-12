@@ -1,4 +1,4 @@
-package com.t28.routes.api;
+package com.t28.routes.http;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;

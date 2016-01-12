@@ -1,7 +1,7 @@
 package com.t28.routes.resource;
 
 import com.mongodb.DBCollection;
-import com.t28.routes.api.foursquare.Foursquare;
+import com.t28.routes.http.foursquare.Foursquare;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

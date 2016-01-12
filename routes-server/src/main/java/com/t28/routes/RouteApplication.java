@@ -2,11 +2,11 @@ package com.t28.routes;
 
 import com.mashape.unirest.http.Unirest;
 import com.mongodb.DB;
-import com.t28.routes.api.Response;
-import com.t28.routes.api.foursquare.Foursquare;
-import com.t28.routes.api.foursquare.FoursquareFactory;
-import com.t28.routes.api.foursquare.venues.VenuesSearch;
-import com.t28.routes.api.unirest.JacksonMapper;
+import com.t28.routes.http.Response;
+import com.t28.routes.http.foursquare.Foursquare;
+import com.t28.routes.http.foursquare.FoursquareFactory;
+import com.t28.routes.http.foursquare.venues.VenuesSearch;
+import com.t28.routes.http.unirest.JacksonMapper;
 import com.t28.routes.mongodb.MongodbFactory;
 import com.t28.routes.resource.ItineraryResource;
 import com.t28.routes.resource.PlaceResource;

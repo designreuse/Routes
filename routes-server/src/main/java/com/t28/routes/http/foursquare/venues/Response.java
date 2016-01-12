@@ -1,7 +1,7 @@
-package com.t28.routes.api.foursquare.venues;
+package com.t28.routes.http.foursquare.venues;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.t28.routes.api.foursquare.entity.TinyVenue;
+import com.t28.routes.http.foursquare.entity.TinyVenue;
 
 import java.util.List;
 

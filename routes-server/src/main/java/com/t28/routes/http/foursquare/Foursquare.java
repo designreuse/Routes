@@ -1,8 +1,6 @@
-package com.t28.routes.api.foursquare;
+package com.t28.routes.http.foursquare;
 
-import com.t28.routes.api.foursquare.venues.VenuesClient;
-import lombok.AccessLevel;
-import lombok.Getter;
+import com.t28.routes.http.foursquare.venues.VenuesClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

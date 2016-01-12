@@ -1,6 +1,6 @@
-package com.t28.routes.api.foursquare;
+package com.t28.routes.http.foursquare;
 
-import com.t28.routes.api.Request;
+import com.t28.routes.http.Request;
 import lombok.AccessLevel;
 import lombok.Getter;
 

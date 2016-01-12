@@ -1,7 +1,7 @@
 package com.t28.routes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.t28.routes.api.ApiConfiguration;
+import com.t28.routes.http.ApiConfiguration;
 import com.t28.routes.mongodb.MongodbFactory;
 import io.dropwizard.Configuration;
 
@@ -17,7 +17,7 @@ public class RouteConfiguration extends Configuration {
 
     @Valid
     @NotNull
-    @JsonProperty("api")
+    @JsonProperty("http")
     private ApiConfiguration apiConfiguration;
 
     public MongodbFactory getMongodbFactory() {

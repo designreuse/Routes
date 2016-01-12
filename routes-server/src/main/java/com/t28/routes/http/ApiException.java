@@ -1,4 +1,4 @@
-package com.t28.routes.api;
+package com.t28.routes.http;
 
 public class ApiException extends Exception {
     public ApiException(String message) {

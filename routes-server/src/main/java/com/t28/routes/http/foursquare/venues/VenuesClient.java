@@ -1,6 +1,6 @@
-package com.t28.routes.api.foursquare.venues;
+package com.t28.routes.http.foursquare.venues;
 
-import com.t28.routes.api.foursquare.Foursquare;
+import com.t28.routes.http.foursquare.Foursquare;
 
 public class VenuesClient {
     private final Foursquare context;

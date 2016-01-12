@@ -1,4 +1,4 @@
-package com.t28.routes.api.unirest;
+package com.t28.routes.http.unirest;
 
 public class JacksonProcessingException extends RuntimeException {
     public JacksonProcessingException(String message, Throwable cause) {
