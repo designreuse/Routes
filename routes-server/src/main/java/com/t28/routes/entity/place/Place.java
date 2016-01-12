@@ -2,37 +2,43 @@ package com.t28.routes.entity.place;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.t28.routes.entity.Entity;
+import com.t28.routes.entity.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Place extends Entity {
     @JsonProperty("_id")
-    private final String id;
+    private ObjectId objectId;
 
     @JsonProperty(required = true)
-    private final String name;
+    private String name;
 
     @JsonProperty(required = true)
-    private final String foursquareId;
+    private String foursquareId;
 
     @JsonProperty(required = true)
-    private final Location location;
+    private Location location;
 
     @JsonProperty(required = true)
-    private final List<Category> categories;
+    private List<Category> categories;
+
+    public Place() {
+    }
 
     private Place(Builder builder) {
         super();
-        id = builder.id;
         name = builder.name;
         foursquareId = builder.foursquareId;
         location = builder.location;
         categories = new ArrayList<Category>(builder.categories);
     }
 
-    public String getId() {
-        return id;
+    public String getObjectId() {
+        if (objectId == null) {
+            return null;
+        }
+        return objectId.getValue();
     }
 
     public String getName() {
@@ -60,11 +66,6 @@ public class Place extends Entity {
 
         public Builder() {
             categories = new ArrayList<Category>();
-        }
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
         }
 
         public Builder name(String name) {

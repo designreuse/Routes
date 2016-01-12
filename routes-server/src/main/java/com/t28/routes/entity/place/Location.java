@@ -6,22 +6,25 @@ import com.t28.routes.entity.Entity;
 
 public class Location extends Entity {
     @JsonProperty(required = true)
-    private final String country;
+    private String country;
 
     @JsonProperty(required = true)
-    private final String countryCode;
+    private String countryCode;
 
     @JsonProperty(required = true)
-    private final String state;
+    private String state;
 
     @JsonProperty
-    private final String city;
+    private String city;
 
     @JsonProperty(required = true)
-    private final String address;
+    private String address;
 
     @JsonProperty(required = true)
-    private final Coordinate coordinate;
+    private Coordinate coordinate;
+
+    public Location() {
+    }
 
     private Location(Builder builder) {
         super();

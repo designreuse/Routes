@@ -5,10 +5,13 @@ import com.t28.routes.entity.Entity;
 
 public class Category extends Entity {
     @JsonProperty(required = true)
-    private final String id;
+    private String id;
 
     @JsonProperty(required = true)
-    private final String name;
+    private String name;
+
+    public Category() {
+    }
 
     private Category(Builder builder) {
         super();
