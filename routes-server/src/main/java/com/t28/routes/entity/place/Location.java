@@ -1,8 +1,9 @@
 package com.t28.routes.entity.place;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.t28.routes.entity.Entity;
 
-public class Location {
+public class Location extends Entity {
     @JsonProperty(required = true)
     private final String country;
 
@@ -22,6 +23,7 @@ public class Location {
     private final Coordinate coordinate;
 
     private Location(Builder builder) {
+        super();
         country = builder.country;
         countryCode = builder.countryCode;
         state = builder.state;

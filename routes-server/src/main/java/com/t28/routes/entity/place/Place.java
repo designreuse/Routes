@@ -1,11 +1,12 @@
 package com.t28.routes.entity.place;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.t28.routes.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Place {
+public class Place extends Entity {
     @JsonProperty("_id")
     private final String id;
 
@@ -22,6 +23,7 @@ public class Place {
     private final List<Category> categories;
 
     private Place(Builder builder) {
+        super();
         id = builder.id;
         name = builder.name;
         foursquareId = builder.foursquareId;

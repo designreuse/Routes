@@ -1,8 +1,9 @@
 package com.t28.routes.entity.place;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.t28.routes.entity.Entity;
 
-public class Category {
+public class Category extends Entity {
     @JsonProperty(required = true)
     private final String id;
 
@@ -10,6 +11,7 @@ public class Category {
     private final String name;
 
     private Category(Builder builder) {
+        super();
         id = builder.id;
         name = builder.name;
     }
