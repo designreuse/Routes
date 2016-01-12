@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VenuesSearchResponse {
+public class VenuesSearch {
     @JsonProperty(required = true)
     private Meta meta;
 
