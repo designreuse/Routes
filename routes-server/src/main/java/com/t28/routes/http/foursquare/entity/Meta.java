@@ -18,6 +18,22 @@ public class Meta {
     @JsonProperty
     private String errorDetail;
 
+    public int getCode() {
+        return code;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public String getErrorType() {
+        return errorType;
+    }
+
+    public String getErrorDetail() {
+        return errorDetail;
+    }
+
     public boolean hasError() {
         return !Strings.isNullOrEmpty(errorType) || !Strings.isNullOrEmpty(errorDetail);
     }
