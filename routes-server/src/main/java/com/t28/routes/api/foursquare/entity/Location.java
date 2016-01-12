@@ -2,6 +2,9 @@ package com.t28.routes.api.foursquare.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Location {
@@ -34,4 +37,11 @@ public class Location {
 
     @JsonProperty
     private String state;
+
+    @JsonProperty("formattedAddress")
+    private List<String> addresses;
+
+    public String formatAddress() {
+        return String.join(" ", Lists.reverse(addresses));
+    }
 }
