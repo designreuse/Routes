@@ -1,5 +1,9 @@
 package com.t28.routes.api.foursquare;
 
+import com.t28.routes.api.foursquare.venues.VenuesClient;
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,6 +18,22 @@ public class Foursquare {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.version = new SimpleDateFormat(VERSION_FORMAT).format(date);
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public VenuesClient venues() {
+        return new VenuesClient(this);
     }
 
     public enum Mode {
