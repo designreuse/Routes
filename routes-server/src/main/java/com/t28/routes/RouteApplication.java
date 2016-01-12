@@ -2,6 +2,8 @@ package com.t28.routes;
 
 import com.mashape.unirest.http.Unirest;
 import com.mongodb.DB;
+import com.t28.routes.api.foursquare.Foursquare;
+import com.t28.routes.api.foursquare.FoursquareFactory;
 import com.t28.routes.api.unirest.JacksonMapper;
 import com.t28.routes.mongodb.MongodbFactory;
 import com.t28.routes.resource.ItineraryResource;
@@ -42,6 +44,9 @@ public class RouteApplication extends Application<RouteConfiguration> {
     public void run(RouteConfiguration configuration, Environment environment) throws Exception {
         final MongodbFactory factory = configuration.getMongodbFactory();
         final DB database = factory.create();
+
+        final FoursquareFactory foursquareFactory = configuration.getApiConfiguration().getFoursquareFactory();
+        final Foursquare foursquare = foursquareFactory.create();
         environment.jersey().register(new PlaceResource());
         environment.jersey().register(new ItineraryResource(database.getCollection("itinerary")));
     }
