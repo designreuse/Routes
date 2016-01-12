@@ -41,6 +41,30 @@ public class Location {
     @JsonProperty("formattedAddress")
     private List<String> addresses;
 
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
     public String formatAddress() {
         return String.join(" ", Lists.reverse(addresses));
     }
