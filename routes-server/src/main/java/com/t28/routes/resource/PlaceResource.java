@@ -1,15 +1,12 @@
 package com.t28.routes.resource;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
 import com.t28.routes.entity.place.Category;
-import com.t28.routes.entity.place.Coordinate;
+import com.t28.routes.entity.Coordinate;
 import com.t28.routes.entity.place.Location;
 import com.t28.routes.entity.place.Place;
 import com.t28.routes.http.HttpException;
@@ -28,7 +25,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
