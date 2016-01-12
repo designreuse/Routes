@@ -12,6 +12,9 @@ public class Location {
     @JsonProperty(required = true)
     private final String state;
 
+    @JsonProperty
+    private final String city;
+
     @JsonProperty(required = true)
     private final String address;
 
@@ -22,6 +25,7 @@ public class Location {
         country = builder.country;
         countryCode = builder.countryCode;
         state = builder.state;
+        city = builder.city;
         address = builder.address;
         coordinate = builder.coordinate;
     }
@@ -38,6 +42,10 @@ public class Location {
         return state;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -50,6 +58,7 @@ public class Location {
         private String country;
         private String countryCode;
         private String state;
+        private String city;
         private String address;
         private Coordinate coordinate;
 
@@ -65,6 +74,11 @@ public class Location {
 
         public Builder state(String state) {
             this.state = state;
+            return this;
+        }
+
+        public Builder city(String city) {
+            this.city = city;
             return this;
         }
 
