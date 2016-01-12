@@ -2,10 +2,9 @@ package com.t28.routes;
 
 import com.mashape.unirest.http.Unirest;
 import com.mongodb.DB;
-import com.t28.routes.http.HttpResponse;
+import com.t28.routes.http.Headers;
 import com.t28.routes.http.foursquare.Foursquare;
 import com.t28.routes.http.foursquare.FoursquareFactory;
-import com.t28.routes.http.foursquare.venues.VenuesSearch;
 import com.t28.routes.http.unirest.JacksonMapper;
 import com.t28.routes.mongodb.MongodbFactory;
 import com.t28.routes.resource.ItineraryResource;
@@ -18,10 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RouteApplication extends Application<RouteConfiguration> {
     private static final String NAME = "Routes";
-    private static final String USER_AGENT_HEADER_KEY = "User-Agent";
-    private static final String USER_AGENT_HEADER_VALUE = "User-Agent";
-    private static final String ACCEPT_ENCODING_HEADER_KEY = "Accept-Encoding";
-    private static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate,sdch";
+    private static final String USER_AGENT = "User-Agent";
+    private static final String ACCEPT_ENCODING = "gzip,deflate,sdch";
+    private static final String ACCEPT_LANGUAGE = "ja-jp";
     private static final long DEFAULT_TIMEOUT = TimeUnit.SECONDS.toMillis(3);
 
     public static void main(String[] args) throws Exception {
@@ -36,8 +34,9 @@ public class RouteApplication extends Application<RouteConfiguration> {
     @Override
     public void initialize(Bootstrap<RouteConfiguration> bootstrap) {
         super.initialize(bootstrap);
-        Unirest.setDefaultHeader(USER_AGENT_HEADER_KEY, USER_AGENT_HEADER_VALUE);
-        Unirest.setDefaultHeader(ACCEPT_ENCODING_HEADER_KEY, ACCEPT_ENCODING_HEADER_VALUE);
+        Unirest.setDefaultHeader(Headers.USER_AGENT, USER_AGENT);
+        Unirest.setDefaultHeader(Headers.ACCEPT_ENCODING, ACCEPT_ENCODING);
+        Unirest.setDefaultHeader(Headers.ACCEPT_LANGUAGE, ACCEPT_LANGUAGE);
         Unirest.setTimeouts(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
         Unirest.setObjectMapper(new JacksonMapper());
     }
