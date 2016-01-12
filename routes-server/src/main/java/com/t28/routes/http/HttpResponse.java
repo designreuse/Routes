@@ -29,7 +29,7 @@ public class HttpResponse<T> {
         return delegate.getBody();
     }
 
-    public String getRawResult() throws HttpException {
+    public String getResultAsText() throws HttpException {
         final InputStream input = delegate.getRawBody();
         try {
             return CharStreams.toString(new InputStreamReader(input, Charsets.UTF_8));
