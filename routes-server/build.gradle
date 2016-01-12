@@ -15,6 +15,7 @@ dependencies {
     compile 'com.mashape.unirest:unirest-java:1.4.7'
     compile 'org.mongodb:mongo-java-driver:2.13.3'
     compile 'org.mongodb:bson:2.13.3'
+    compile 'org.mongojack:mongojack:2.5.1'
 
 //    providedCompile 'org.projectlombok:lombok:1.16.6'
 
