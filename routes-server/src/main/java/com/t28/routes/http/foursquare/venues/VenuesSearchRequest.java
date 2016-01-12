@@ -26,8 +26,7 @@ public class VenuesSearchRequest extends FoursquareRequest<VenuesSearch> {
     @Override
     public HttpResponse<VenuesSearch> send() throws HttpException {
         try {
-            final com.mashape.unirest.http.HttpResponse httpResponse = get(VenuesSearch.class);
-            return HttpResponse.from(httpResponse);
+            return HttpResponse.from(get(VenuesSearch.class));
         } catch (UnirestException e) {
             throw new HttpException(e);
         }
