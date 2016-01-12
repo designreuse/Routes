@@ -80,8 +80,8 @@ public class Place {
             return this;
         }
 
-        public Builder category(Category category) {
-            categories.add(category);
+        public Builder categories(List<Category> categories) {
+            categories.addAll(categories);
             return this;
         }
 
