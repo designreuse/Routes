@@ -6,6 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public abstract class Entity {
     private final ObjectMapper objectMapper;
 
+    protected Entity() {
+        this(new ObjectMapper());
+    }
+
     protected Entity(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
