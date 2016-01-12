@@ -17,7 +17,7 @@ public class RouteConfiguration extends Configuration {
 
     @Valid
     @NotNull
-    @JsonProperty("http")
+    @JsonProperty("api")
     private ApiConfiguration apiConfiguration;
 
     public MongodbFactory getMongodbFactory() {
