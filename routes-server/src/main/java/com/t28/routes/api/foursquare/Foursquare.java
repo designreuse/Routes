@@ -13,7 +13,7 @@ public class Foursquare {
     Foursquare(String clientId, String clientSecret, Date date) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-        this.version = new SimpleDateFormat("YYYYMMDD").format(date);
+        this.version = new SimpleDateFormat(VERSION_FORMAT).format(date);
     }
 
     public enum Mode {
