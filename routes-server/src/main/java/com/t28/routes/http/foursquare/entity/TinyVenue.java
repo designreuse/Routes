@@ -19,6 +19,19 @@ public class TinyVenue {
     @JsonProperty(required = true)
     private List<Category> categories;
 
-    @JsonProperty(required = true, value = "verified")
-    private boolean isVerified;
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
 }
