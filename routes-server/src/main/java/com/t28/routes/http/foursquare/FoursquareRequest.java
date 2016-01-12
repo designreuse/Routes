@@ -1,10 +1,7 @@
 package com.t28.routes.http.foursquare;
 
 import com.t28.routes.http.Request;
-import lombok.AccessLevel;
-import lombok.Getter;
 
-@Getter(AccessLevel.PROTECTED)
 public abstract class FoursquareRequest<T> extends Request<T> {
     private static final String KEY_CLIENT_ID = "client_id";
     private static final String KEY_CLIENT_SECRET = "client_secret";

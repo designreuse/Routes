@@ -2,11 +2,9 @@ package com.t28.routes.http.foursquare.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
 
 import java.util.List;
 
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TinyVenue {
     @JsonProperty(required = true)

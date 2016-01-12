@@ -2,12 +2,10 @@ package com.t28.routes.http.foursquare.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
-import lombok.Getter;
-import lombok.ToString;
 
-@Getter
-@ToString
 public class Meta {
+    public static final int CODE_OK = 200;
+
     @JsonProperty(required = true)
     private int code;
 
