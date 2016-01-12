@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Coordinate extends Entity {
     @JsonProperty(required = true)
-    private final double lat;
+    private double lat;
 
     @JsonProperty(required = true)
-    private final double lon;
+    private double lon;
+
+    public Coordinate() {
+    }
 
     private Coordinate(Builder builder) {
         super();
