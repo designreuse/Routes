@@ -8,7 +8,7 @@ import com.t28.routes.http.foursquare.Foursquare;
 import com.t28.routes.http.foursquare.FoursquareRequest;
 
 public class VenuesSearchRequest extends FoursquareRequest<VenuesSearch> {
-    private static final String URL = "https://http.foursquare.com/v2/venues/search";
+    private static final String URL = "https://api.foursquare.com/v2/venues/search";
     private static final String KEY_QUERY = "query";
     private static final String KEY_COORDINATE = "ll";
     private static final String KEY_RADIUS = "radius";
