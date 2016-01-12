@@ -5,7 +5,7 @@ import com.mongodb.DB;
 import com.t28.routes.api.Response;
 import com.t28.routes.api.foursquare.Foursquare;
 import com.t28.routes.api.foursquare.FoursquareFactory;
-import com.t28.routes.api.foursquare.venues.VenuesSearchResponse;
+import com.t28.routes.api.foursquare.venues.VenuesSearch;
 import com.t28.routes.api.unirest.JacksonMapper;
 import com.t28.routes.mongodb.MongodbFactory;
 import com.t28.routes.resource.ItineraryResource;
@@ -49,9 +49,11 @@ public class RouteApplication extends Application<RouteConfiguration> {
 
         final FoursquareFactory foursquareFactory = configuration.getApiConfiguration().getFoursquareFactory();
         final Foursquare foursquare = foursquareFactory.create();
+
         final Object object = foursquare.venues().search();
-        final Response<VenuesSearchResponse> response = foursquare.venues().search().coordinate(40.7, -74).send();
-        environment.jersey().register(new PlaceResource());
+        final Response<VenuesSearch> response = foursquare.venues().search().coordinate(35.681382, 139.7638953).send();
+
+        environment.jersey().register(new PlaceResource(database.getCollection("place"), foursquare));
         environment.jersey().register(new ItineraryResource(database.getCollection("itinerary")));
     }
 }
