@@ -20,14 +20,6 @@ public class MongodbFactory extends Configuration {
     @JsonProperty
     private int port;
 
-    @Valid
-    @JsonProperty
-    private String username;
-
-    @Valid
-    @JsonProperty
-    private String password;
-
     public DB create() throws MongodbException {
         try {
             final MongoClient client = new MongoClient(host, port);
