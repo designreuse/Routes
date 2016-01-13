@@ -13,6 +13,7 @@ import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.job.Service;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.problem.solution.route.VehicleRoute;
+import jsprit.core.problem.solution.route.activity.TimeWindow;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.VehicleImpl;
 import jsprit.core.problem.vehicle.VehicleType;
@@ -91,12 +92,20 @@ public class JspritFinder implements Finder {
     }
 
     public AbstractVehicle createVehicle(Pair<Place, Constraint> origin, Pair<Place, Constraint> destination) {
-        // TODO: Need to configure constraint
         final VehicleImpl.Builder builder = VehicleImpl.Builder.newInstance("routes-vehicle");
         builder.setType(createVehicleType())
                 .setReturnToDepot(true)
                 .setStartLocation(createLocation(origin.getValue1()))
                 .setEndLocation(createLocation(destination.getValue1()));
+        final Constraint constraint1 = origin.getValue2();
+        if (constraint1.getDepartTime() > 0) {
+            builder.setEarliestStart(constraint1.getDepartTime());
+        }
+
+        final Constraint constraint2 = destination.getValue2();
+        if (constraint2.getArriveTime() > 0) {
+            builder.setLatestArrival(constraint2.getArriveTime());
+        }
         return builder.build();
     }
 
@@ -117,12 +126,16 @@ public class JspritFinder implements Finder {
         // TODO: Need to rewire code
         while ((pair = places.removeFirst()) != null) {
             final Place place = pair.getValue1();
-            // TODO: Need to configure constraint
             final Constraint constraint = pair.getValue2();
-            final Service service = Service.Builder.newInstance(place.getObjectId())
-                    .setLocation(createLocation(place))
-                    .build();
-            jobs.add(service);
+            final Service.Builder builder = Service.Builder.newInstance(place.getObjectId())
+                    .setLocation(createLocation(place));
+            if (constraint.getStayingTime() > 0) {
+                builder.setServiceTime(constraint.getStayingTime());
+            }
+            if (constraint.getArriveTime() > 0 && constraint.getDepartTime() > 0) {
+                builder.setTimeWindow(TimeWindow.newInstance(constraint.getArriveTime(), constraint.getDepartTime()));
+            }
+            jobs.add(builder.build());
             if (places.size() == 0) {
                 break;
             }
