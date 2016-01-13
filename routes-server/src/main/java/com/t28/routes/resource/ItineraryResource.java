@@ -1,6 +1,17 @@
 package com.t28.routes.resource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
+import com.t28.routes.entity.itinerary.Constraint;
+import com.t28.routes.entity.itinerary.Constraints;
+import com.t28.routes.entity.itinerary.Itinerary;
+import com.t28.routes.entity.place.Place;
+import com.t28.routes.finder.Finder;
+import com.t28.routes.finder.JspritFinder;
+import com.t28.routes.finder.NotFoundException;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -12,14 +23,19 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/itinerary")
 @Produces(MediaType.APPLICATION_JSON)
 public class ItineraryResource {
-    private final DBCollection collection;
+    private final DBCollection placeCollection;
+    private final DBCollection itineraryCollection;
 
-    public ItineraryResource(DBCollection collection) {
-        this.collection = collection;
+    public ItineraryResource(DBCollection placeCollection, DBCollection itineraryCollection) {
+        this.placeCollection = placeCollection;
+        this.itineraryCollection = itineraryCollection;
     }
 
     @GET
@@ -30,8 +46,27 @@ public class ItineraryResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create() {
-        return Response.ok().build();
+    public Response create(Constraints constraints) {
+        if (constraints == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
+        if (constraints.count() < 2) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
+        final List<Place> places = findPlaces(constraints.getAll());
+        final Finder finder = new JspritFinder();
+        for (Place place : places) {
+            finder.add(place);
+        }
+
+        try {
+            final Itinerary result = finder.find();
+            return Response.ok().entity(result).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
     @PUT
@@ -44,5 +79,28 @@ public class ItineraryResource {
     @Path("/{id}")
     public Response delete() {
         return Response.ok().build();
+    }
+
+    private List<Place> findPlaces(List<Constraint> constraints) {
+        final List<Place> places = new ArrayList<Place>();
+        for (Constraint constraint : constraints) {
+            final Place place = findPlace(constraint.getId());
+            places.add(place);
+        }
+        return places;
+    }
+
+    private Place findPlace(String id) {
+        final DBObject object = placeCollection.findOne(new ObjectId(id));
+        if (object == null) {
+            throw new RuntimeException("object == null");
+        }
+
+        final String json = JSON.serialize(object);
+        try {
+            return new ObjectMapper().readValue(json, Place.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
