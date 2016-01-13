@@ -35,19 +35,16 @@ public class JspritFinder implements Finder {
         pairs = new LinkedList<Pair<Place, Constraint>>();
     }
 
-    @Override
     public Finder add(Place place) {
         add(place, Constraint.EMPTY);
         return this;
     }
 
-    @Override
     public Finder add(Place place, Constraint constraint) {
         pairs.add(Pair.of(place, constraint));
         return this;
     }
 
-    @Override
     public Itinerary find() throws NotFoundException {
         if (pairs.size() < 2) {
             throw new NotFoundException("pairs.size() < 2");
