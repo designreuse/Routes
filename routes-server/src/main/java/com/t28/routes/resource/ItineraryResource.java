@@ -55,15 +55,15 @@ public class ItineraryResource {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        final List<Place> places = findPlaces(constraints.getAll());
         final Finder finder = new JspritFinder();
-        for (Place place : places) {
-            finder.add(place);
+        for (Constraint constraint : constraints.getAll()) {
+            final Place place = findPlace(constraint.getId());
+            finder.add(place, constraint);
         }
 
         try {
             final Itinerary result = finder.find();
-            return Response.ok().entity(result).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -79,15 +79,6 @@ public class ItineraryResource {
     @Path("/{id}")
     public Response delete() {
         return Response.ok().build();
-    }
-
-    private List<Place> findPlaces(List<Constraint> constraints) {
-        final List<Place> places = new ArrayList<Place>();
-        for (Constraint constraint : constraints) {
-            final Place place = findPlace(constraint.getId());
-            places.add(place);
-        }
-        return places;
     }
 
     private Place findPlace(String id) {
