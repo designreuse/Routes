@@ -1,6 +1,5 @@
 package com.t28.routes;
 
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -9,8 +8,6 @@ import com.t28.routes.http.foursquare.Foursquare;
 import com.t28.routes.http.foursquare.FoursquareFactory;
 import com.t28.routes.http.google.Google;
 import com.t28.routes.http.google.GoogleFactory;
-import com.t28.routes.http.google.entity.DistanceMatrix;
-import com.t28.routes.http.google.maps.DistanceMatrixRequest;
 import com.t28.routes.http.unirest.JacksonMapper;
 import com.t28.routes.mongodb.MongodbFactory;
 import com.t28.routes.resource.ItineraryResource;
