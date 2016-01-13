@@ -1,10 +1,16 @@
 package com.t28.routes;
 
+import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.t28.routes.http.Headers;
 import com.t28.routes.http.foursquare.Foursquare;
 import com.t28.routes.http.foursquare.FoursquareFactory;
+import com.t28.routes.http.google.Google;
+import com.t28.routes.http.google.GoogleFactory;
+import com.t28.routes.http.google.entity.DistanceMatrix;
+import com.t28.routes.http.google.maps.DistanceMatrixRequest;
 import com.t28.routes.http.unirest.JacksonMapper;
 import com.t28.routes.mongodb.MongodbFactory;
 import com.t28.routes.resource.ItineraryResource;
@@ -49,7 +55,12 @@ public class RouteApplication extends Application<RouteConfiguration> {
         final FoursquareFactory foursquareFactory = configuration.getApiConfiguration().getFoursquareFactory();
         final Foursquare foursquare = foursquareFactory.create();
 
-        environment.jersey().register(new PlaceResource(database.getCollection("place"), foursquare));
-        environment.jersey().register(new ItineraryResource(database.getCollection("itinerary")));
+        final GoogleFactory googleFactory = configuration.getApiConfiguration().getGoogleFactory();
+        final Google google = googleFactory.create();
+
+        final DBCollection placeCollection = database.getCollection("place");
+        final DBCollection itineraryCollection = database.getCollection("itinerary");
+        environment.jersey().register(new PlaceResource(placeCollection, foursquare));
+        environment.jersey().register(new ItineraryResource(placeCollection, itineraryCollection));
     }
 }
