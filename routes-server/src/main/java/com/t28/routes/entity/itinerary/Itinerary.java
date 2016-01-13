@@ -2,13 +2,14 @@ package com.t28.routes.entity.itinerary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.t28.routes.entity.Entity;
+import com.t28.routes.entity.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Itinerary extends Entity {
     @JsonProperty("_id")
-    public String id;
+    private ObjectId id;
 
     @JsonProperty
     public String name;
@@ -17,14 +18,32 @@ public class Itinerary extends Entity {
     public String description;
 
     @JsonProperty
-    public Item origin;
+    private List<Entry> entries;
 
-    @JsonProperty
-    public Item destination;
+    public Itinerary() {
+        this.entries = new ArrayList<Entry>();
+    }
 
-    @JsonProperty
-    public Set<Item> items;
+    public boolean hasId() {
+        return id != null;
+    }
 
-    @JsonProperty
-    public List<Item> route;
+    public String getId() {
+        if (id == null) {
+            return null;
+        }
+        return id.getValue();
+    }
+
+    public boolean hasItems() {
+        return entries != null && entries.size() != 0;
+    }
+
+    public List<Entry> getEntries() {
+        return new ArrayList<Entry>(entries);
+    }
+
+    public void add(Entry entry) {
+        this.entries.add(entry);
+    }
 }
