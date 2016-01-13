@@ -11,13 +11,13 @@ public class Constraint extends Entity {
     private String id;
 
     @JsonProperty
-    public int stayingTime;
+    private int stayingTime;
 
     @JsonProperty
-    public int arriveTime;
+    private int arriveTime;
 
     @JsonProperty
-    public int departTime;
+    private int departTime;
 
     public boolean isEmpty() {
         if (!Strings.isNullOrEmpty(id)) {
@@ -28,5 +28,17 @@ public class Constraint extends Entity {
 
     public String getId() {
         return id;
+    }
+
+    public int getStayingTime() {
+        return stayingTime;
+    }
+
+    public int getArriveTime() {
+        return arriveTime;
+    }
+
+    public int getDepartTime() {
+        return departTime;
     }
 }
