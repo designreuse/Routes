@@ -1,2 +1,2 @@
-include ':routes-server', ':routes-app'
 rootProject.name = 'routes'
+include ':routes-server', ':routes-app'
