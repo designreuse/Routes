@@ -5,7 +5,7 @@ import com.t28.routes.http.google.maps.MapsClient;
 public class Google {
     private final String appId;
 
-    Google(String appId) {
+    public Google(String appId) {
         this.appId = appId;
     }
 
